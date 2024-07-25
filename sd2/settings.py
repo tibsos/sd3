@@ -8,7 +8,13 @@ SECRET_KEY = 'django-insecure-l(#za=%g#*eiy!bp@@9b3#t5)jeg_#+my096f95wd3+7d8tzb(
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+
+    'www.paradaiz.ru',
+    'paradaiz.ru',
+    '127.0.0.1',
+
+]
 
 INSTALLED_APPS = [
 
@@ -102,16 +108,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
-# scss
-
-STATICFILES_FINDERS = (
-    'compressor.finders.CompressorFinder',
-)
 
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
