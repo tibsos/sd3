@@ -14,6 +14,8 @@ ALLOWED_HOSTS = [
     'paradaiz.ru',
     '127.0.0.1',
 
+    '192.168.1.41',
+
 ]
 
 INSTALLED_APPS = [
@@ -29,6 +31,7 @@ INSTALLED_APPS = [
     'tinymce',
 
     'base',
+    'analytics',
 
 ]
 
