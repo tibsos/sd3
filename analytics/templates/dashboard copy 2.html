@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard</title>
+
+    <!-- Load Chart.js and Chart.js Geo plugin from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-geo@3"></script>
+    <!-- Load Flatpickr for date range picker -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .calendar-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            max-width: 300px;
+        }
+
+        #chart-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #map-container {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        canvas {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Analytics Dashboard</h1>
+
+    <!-- Calendar Date Picker -->
+    <div class="calendar-container">
+        <input type="text" id="date-range" class="calendar" placeholder="Select Date Range" readonly>
+    </div>
+
+    <!-- Bar Chart Container -->
+    <div id="chart-container">
+        <canvas id="viewsChart" width="800" height="400"></canvas>
+    </div>
+
+    <!-- Map Container -->
+    <div id="map-container">
+        <canvas id="map" width="800" height="600"></canvas>
+    </div>
+
+    <script>
+        // Initial data passed from Django
+        const initialChartData = {
+            labels: {{ chart_labels|safe }},
+            datasets: [{
+                label: 'Views',
+                data: {{ chart_data|safe }},
+                backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        const initialVisitData = {{ visit_data|safe }};
+        const initialCountries = {{ country_names|safe }};
+
+        // Create the bar chart
+        const ctx = document.getElementById('viewsChart').getContext('2d');
+        let viewsChart = new Chart(ctx, {
+            type: 'bar',
+            data: initialChartData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Map chart configuration
+        const mapCtx = document.getElementById('map').getContext('2d');
+        let mapChart;
+
+        function renderMap(visitData, countries) {
+            fetch('https://unpkg.com/world-atlas/countries-110m.json')
+                .then((response) => response.json())
+                .then((topology) => {
+                    const countryShapes = ChartGeo.topojson.feature(topology, topology.objects.countries).features;
+
+                    // Create the map chart if it doesn't exist, else update it
+                    if (!mapChart) {
+                        mapChart = new Chart(mapCtx, {
+                            type: 'choropleth',
+                            data: {
+                                labels: countryShapes.map(d => d.properties.name), // Country names
+                                datasets: [{
+                                    label: 'Visitors by Country',
+                                    data: countryShapes.map(d => {
+                                        const countryName = d.properties.name;
+                                        const index = countries.indexOf(countryName);
+                                        const visitCount = index !== -1 ? visitData[index] : 0;
+                                        return {
+                                            feature: d,
+                                            value: visitCount
+                                        };
+                                    })
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    xy: {
+                                        projection: 'equalEarth' // Show the full globe
+                                    }
+                                },
+                                plugins: {
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                const countryName = context.raw.feature.properties.name;
+                                                return `${countryName}: ${context.raw.value || 0} visits`;
+                                            }
+                                        }
+                                    },
+                                    legend: {
+                                        display: false // Hide legend
+                                    }
+                                },
+                                elements: {
+                                    geoFeature: {
+                                        backgroundColor: (ctx) => {
+                                            const value = ctx.raw ? ctx.raw.value : 0;
+                                            return value === 0
+                                                ? 'rgba(255, 255, 255, 1)'  // White for 0 visits
+                                                : `rgba(0, 0, 139, ${Math.max(0.1, value / 100)})`;  // Dark blue based on visit count
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        mapChart.data.datasets[0].data = countryShapes.map(d => {
+                            const countryName = d.properties.name;
+                            const index = countries.indexOf(countryName);
+                            const visitCount = index !== -1 ? visitData[index] : 0;
+                            return {
+                                feature: d,
+                                value: visitCount
+                            };
+                        });
+                        mapChart.update();
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error loading map data:', error);
+                });
+        }
+
+        // Render initial map
+        renderMap(initialVisitData, initialCountries);
+
+        flatpickr('#date-range', {
+    mode: 'range',
+    dateFormat: 'Y-m-d',
+    onClose: function(selectedDates) {
+        if (selectedDates.length === 2) {
+            const startDate = selectedDates[0].toISOString().slice(0, 10);
+            const endDate = selectedDates[1].toISOString().slice(0, 10);
+
+            // Fetch new data from server using AJAX
+            fetch(`/get-data-by-date?start_date=${startDate}&end_date=${endDate}`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'  // Explicitly set this header
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                updateChart(data.chart_labels, data.chart_data);
+                renderMap(data.visit_data, data.country_names);
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+        }
+    }
+});
+
+
+        // Function to update the chart with new data
+        function updateChart(labels, data) {
+            viewsChart.data.labels = labels;
+            viewsChart.data.datasets[0].data = data;
+            viewsChart.update();
+        }
+    </script>
+</body>
+</html>

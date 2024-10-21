@@ -4,7 +4,7 @@ from .views import *
 
 urlpatterns = [
 
-    path('d4shb0ard', dashboard),
-    path('gdbd', get_data_by_date),
+    path('4d-log1n', log_in),
+    path('logout', log_out),
 
 ]

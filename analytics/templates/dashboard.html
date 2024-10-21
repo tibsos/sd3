@@ -1,13 +1,440 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>Панель аналитики</title>
+
+    
+    <script src="{% static 'packages/chart.js' %}"></script>
+    <script src="{% static 'packages/chartjs-chart-geo.min.js' %}"></script>
+    <script src="{% static 'packages/flatpickr.js' %}"></script>
+    
+    <link rel="stylesheet" href="{% static 'css/flatpickr.min.css' %}">
+    <script src="{% static 'packages/jquery.min.js' %}"><script>
+
+    <style>
+
+        @font-face {
+            font-family: C;
+            src: url("{% static 'fonts/Comforta.ttf' %}");
+        }
+
+        body {
+            font-family: C;
+
+            background: #f6eadf;
+
+            color: #1E2330;
+
+        }
+
+        input, button {
+
+            font-family: C;
+
+        }
+
+        input {
+
+            background: #f6eadf;
+
+            width: 200px;
+            
+            text-align: center;
+
+            border: none;
+
+            box-shadow: 3px 3px 8px #d8cec4,
+                    -3px -3px 8px #fffffa;
+
+        }
+
+        .main {
+
+            position: relative;
+            
+            
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+
+        }
+
+        .website-title {
+
+            font-size: 50px;
+
+            text-align: center;
+
+        }
+
+        .section {
+
+            position: relative;
+
+            width: calc(100% - 300px);
+
+            margin-bottom: 70px;
+
+            border-radius: 20px;
+
+            box-shadow: 3px 3px 8px #d8cec4,
+                    -3px -3px 8px #fffffa;
+
+        }
+
+
+        .section-title {
+
+            position: relative;
+
+            font-size: 30px;
+            text-align: center;
+
+        }
+
+        .analytics-overview {
+
+            position: relative;
+
+            display: flex;
+            justify-content: center;
+
+            padding: 20px;
+            
+        }   
+
+        .analytics-container {
+
+            position: relative;
+
+            width: 300px;
+            height: 200px;
+
+            margin-right: 50px;
+
+            border-radius: 20px;
+
+            box-shadow: 3px 3px 8px #d8cec4,
+                    -3px -3px 8px #fffffa;
+
+        }
+
+        .analytics-container span {
+
+            position: relative;
+
+            display: block;
+            text-align: center;
+
+        }
+
+        .container-description {
+
+            top: 20px;
+
+            font-size: 23px;
+
+        }
+
+        .container-value {
+
+            top: 50px;
+
+            font-size: 60px;
+
+        }
+
+        .calendar-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            max-width: 300px;
+        }
+
+        #chart-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #map-container {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        canvas {
+            margin-top: 20px;
+        }
+
+
+    </style>
 </head>
 <body>
-    
-    <h1>Панель аналитики</h1>
 
+    <div class="navbar">
+
+        <a href="/logout">Выйти</a>
+
+    </div>
+    
+    <div class="main">
+
+        <h1 class="website-title" style="width: 100%;">Панель аналитики</h1>
+
+        <div class="section" style="width: 400px; text-align: center; ">
+
+            <h4>Временный диапозон</h4>
+        <!-- Календарь для выбора диапазона дат -->
+        <div class="calendar-container">
+            <input type="text" id="date-range" class="calendar" placeholder="Выберите диапазон дат" readonly>
+        </div>
+
+        </div>
+        
+        
+        <div class="section">
+            
+            <h2 class="section-title">Краткая аналитика</h2>
+
+            <div class="analytics-overview">
+
+                <div class="analytics-container">
+        
+                    <span class="container-description">Количество просмотров</span>
+                    <span class="container-value" id="totalVisits">{{ total_visits }}</span>
+        
+                </div>
+        
+                <div class="analytics-container">
+        
+                    <span class="container-description">Среднее время просмотра</span>
+                    <span class="container-value"></span>
+        
+                </div>
+        
+                <div class="analytics-container">
+        
+                    <span class="container-description">Количество уникальных просмотров</span>
+                    <span class="container-value"></span>
+        
+                </div>
+        
+                <div class="analytics-container">
+        
+                    <span class="container-description">Количество ключевых действий</span>
+                    <span class="container-value"></span>
+        
+                </div>
+        
+            </div>
+
+        </div>
+
+        <div class="section">
+
+            <h2 class="section-title">Развернутая аналитика</h2>
+        <!-- Контейнер для графика -->
+        <div id="chart-container">
+            <canvas id="viewsChart" width="800" height="400"></canvas>
+        </div>
+
+        </div>
+
+        <div class="section">
+
+            <h2 class="section-title">Количество пользователей по странам</h2>
+
+        <!-- Контейнер для карты -->
+        <div id="map-container">
+            <canvas id="map" width="800" height="600"></canvas>
+        </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        // Начальные данные для графика
+        const initialChartData = {
+            labels: {{ chart_labels|safe }},
+            datasets: [{
+                label: 'Просмотры',
+                data: {{ chart_data|safe }},
+                backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        const initialVisitData = {{ visit_data|safe }};
+        const initialCountries = {{ country_names|safe }};
+
+        // Создание столбчатого графика
+        const ctx = document.getElementById('viewsChart').getContext('2d');
+        let viewsChart = new Chart(ctx, {
+            type: 'bar',
+            data: initialChartData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Количество просмотров'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Дата'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Конфигурация карты
+        const mapCtx = document.getElementById('map').getContext('2d');
+        let mapChart;
+
+        function renderMap(visitData, countries) {
+            fetch("{% static 'packages/countries-110m.json' %}")
+                .then((response) => response.json())
+                .then((topology) => {
+                    const countryShapes = ChartGeo.topojson.feature(topology, topology.objects.countries).features;
+
+                    // Create the map chart if it doesn't exist, else update it
+                    if (!mapChart) {
+                        mapChart = new Chart(mapCtx, {
+                            type: 'choropleth',
+                            data: {
+                                labels: countryShapes.map(d => d.properties.name), // Country names
+                                datasets: [{
+                                    label: 'Visitors by Country',
+                                    data: countryShapes.map(d => {
+                                        const countryName = d.properties.name;
+                                        const index = countries.indexOf(countryName);
+                                        const visitCount = index !== -1 ? visitData[index] : 0;
+                                        return {
+                                            feature: d,
+                                            value: visitCount
+                                        };
+                                    })
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    xy: {
+                                        projection: 'equalEarth' // Show the full globe
+                                    }
+                                },
+                                plugins: {
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                const countryName = context.raw.feature.properties.name;
+                                                return `${countryName}: ${context.raw.value || 0} просмотров`;
+                                            }
+                                        }
+                                    },
+                                    legend: {
+                                        display: false // Hide legend
+                                    }
+                                },
+                                elements: {
+                                    geoFeature: {
+                                        backgroundColor: (ctx) => {
+                                            const value = ctx.raw ? ctx.raw.value : 0;
+                                            return value === 0
+                                                ? 'rgba(255, 255, 255, 1)'  // White for 0 visits
+                                                : `rgba(0, 0, 139, ${Math.max(0.1, value / 100)})`;  // Dark blue based on visit count
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        mapChart.data.datasets[0].data = countryShapes.map(d => {
+                            const countryName = d.properties.name;
+                            const index = countries.indexOf(countryName);
+                            const visitCount = index !== -1 ? visitData[index] : 0;
+                            return {
+                                feature: d,
+                                value: visitCount
+                            };
+                        });
+                        mapChart.update();
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error loading map data:', error);
+                });
+        }
+
+        // Инициализация карты с начальными данными
+        renderMap(initialVisitData, initialCountries);
+
+        // Календарь для выбора диапазона дат
+        flatpickr('#date-range', {
+            mode: 'range',
+            dateFormat: 'd-m-Y',  // Формат dd-mm-yyyy
+            defaultDate: [
+                new Date().fp_incr(-7), // 7 дней назад
+                new Date() // Сегодня
+            ],
+            onClose: function(selectedDates) {
+                if (selectedDates.length === 2) {
+                    const startDate = selectedDates[0].toISOString().slice(0, 10);
+                    const endDate = selectedDates[1].toISOString().slice(0, 10);
+
+                    // Получение новых данных с сервера через AJAX
+                    fetch(`/gdbd?start_date=${startDate}&end_date=${endDate}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Ошибка сети');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        updateChart(data.chart_labels, data.chart_data);
+                        renderMap(data.visit_data, data.country_names);
+                        updateData(data.total_visits)
+                    })
+                    .catch(error => {
+                        console.error('Произошла ошибка с fetch:', error);
+                    });
+                }
+            }
+        });
+
+        // Функция обновления графика
+        function updateChart(labels, data) {
+            viewsChart.data.labels = labels;
+            viewsChart.data.datasets[0].data = data;
+            viewsChart.update();
+        }
+
+        function updateData(total_visits) {
+
+            $('#totalVisits').text(total_visits);
+
+        }
+
+    </script>
 </body>
 </html>

@@ -3,40 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phone Input with Russian Flag</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        .phone-input-container {
-            display: flex;
-            align-items: center;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 5px;
-            width: fit-content;
-        }
-        .phone-input-container .flag-icon {
-            margin-right: 10px;
-        }
-        .phone-input-container input {
-            border: none;
-            outline: none;
-            font-size: 16px;
-        }
-    </style>
+    <title>Scroll to Section</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <div class="phone-input-container">
-        <span class="flag-icon">
-            <i class="fas fa-flag-russia"></i>
-        </span>
-        <input type="text" id="phone" placeholder="+7" />
-    </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const phoneInput = document.getElementById("phone");
-            phoneInput.value = "+7 ";
+<button id="scrollButton">Scroll to Section</button>
+
+<div style="height: 1000px;"></div> <!-- Just to add space for scrolling -->
+
+<section id="targetSection">
+  <h2>This is the target section</h2>
+  <p>Some content here...</p>
+</section>
+
+<script>
+    $(document).ready(function() {
+        $("#scrollButton").click(function() {
+            var targetOffset = $("#targetSection").offset().top; // Get the top position of the section
+            $('html, body').animate({
+                scrollTop: targetOffset
+            }, 1000); // Animate scroll to that position
         });
-    </script>
+    });
+</script>
+
 </body>
 </html>

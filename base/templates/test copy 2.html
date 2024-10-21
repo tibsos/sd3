@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smooth Scroll Effect on Scroll Start</title>
+    <style>
+        /* Basic Styles */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* Prevent default scrolling behavior */
+            font-family: Arial, sans-serif;
+        }
+
+        section {
+            height: 100vh; /* Full screen height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            color: white;
+            scroll-behavior: smooth; /* Enables smooth scrolling */
+        }
+
+        #section1 {
+            background-color: #1abc9c;
+        }
+
+        #section2 {
+            background-color: #3498db;
+        }
+
+        #section3 {
+            background-color: #9b59b6;
+        }
+
+        #section4 {
+            background-color: #e74c3c;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0 15px;
+            font-size: 18px;
+        }
+
+        .nav-link:hover {
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<div class="nav-container">
+    <a href="#section1" class="nav-link">Section 1</a>
+    <a href="#section2" class="nav-link">Section 2</a>
+    <a href="#section3" class="nav-link">Section 3</a>
+    <a href="#section4" class="nav-link">Section 4</a>
+</div>
+
+<!-- Fullscreen Sections -->
+<section id="section1">
+    Section 1
+</section>
+<section id="section2">
+    Section 2
+</section>
+<section id="section3">
+    Section 3
+</section>
+<section id="section4">
+    Section 4
+</section>
+
+
+</body>
+</html>

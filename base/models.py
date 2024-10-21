@@ -6,8 +6,10 @@ class Customer(m.Model):
 
     uid = m.UUIDField(default = uuid4)
 
-    name = m.TextField()
-    phone = m.TextField()
+    website_type = m.TextField(null = True)
+    name = m.TextField(null = True)
+    email = m.TextField(null = True)
+    phone = m.TextField(null = True)
 
     sent_at = m.DateTimeField(auto_now_add = True)
     updated_at = m.DateTimeField(auto_now = True)
@@ -15,29 +17,6 @@ class Customer(m.Model):
     def __str__(self):
 
         return self.name
-
-class Visit(m.Model):
-
-    uid = m.UUIDField(default = uuid4)
-
-    url = m.URLField(null = True)
-    
-    # user info
-
-    ip = m.TextField(blank = True, null = True)
-    country = m.TextField(blank = True, null = True)
-    city = m.TextField(blank = True, null = True)
-
-    mobile = m.BooleanField()
-
-    # request time
-
-    entered_at = m.DateTimeField()
-
-    def __str__(self):
-
-        return str(self.entered_at)
-    
 
 class ButtonClick(m.Model):
     

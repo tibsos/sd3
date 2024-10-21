@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infinite Scrolling List with Controls</title>
+  <style>
+    .scroll-container {
+      width: 100%; /* Full width */
+      overflow: hidden; /* Hide overflow content */
+      white-space: nowrap; /* Keep items in a single line */
+      border: 2px solid #ccc;
+      position: relative;
+    }
+
+    .scrollable-list {
+      display: flex;
+      transition: transform 0.5s ease-in-out; /* Smooth transition */
+    }
+
+    .item {
+      flex: 0 0 auto; /* Prevent items from shrinking or growing */
+      width: 150px;
+      height: 150px;
+      margin: 10px;
+      background-color: lightblue;
+      text-align: center;
+      line-height: 150px;
+      font-size: 18px;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Style for the left and right buttons */
+    .scroll-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .scroll-btn.left {
+      left: 0;
+    }
+
+    .scroll-btn.right {
+      right: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="scroll-container">
+  <button class="scroll-btn left">⬅</button>
+  <div class="scrollable-list">
+    <!-- Add many items here for testing -->
+    <div class="item">Item 1</div>
+    <div class="item">Item 2</div>
+    <div class="item">Item 3</div>
+    <div class="item">Item 4</div>
+    <div class="item">Item 5</div>
+    <div class="item">Item 6</div>
+    <div class="item">Item 7</div>
+    <div class="item">Item 8</div>
+    <div class="item">Item 9</div>
+    <div class="item">Item 10</div>
+    <div class="item">Item 11</div>
+    <div class="item">Item 12</div>
+    <div class="item">Item 13</div>
+    <div class="item">Item 14</div>
+    <div class="item">Item 15</div>
+  </div>
+  <button class="scroll-btn right">➡</button>
+</div>
+
+<script>
+  const scrollableList = document.querySelector('.scrollable-list');
+  const items = document.querySelectorAll('.item');
+  const itemWidth = items[0].offsetWidth + 20; // Item width + margin
+  let offset = 0;
+
+  function scrollItems() {
+    offset -= itemWidth; // Move items left by their width
+    scrollableList.style.transform = `translateX(${offset}px)`;
+
+    // Once the first item is completely off-screen, move it to the end
+    if (offset <= -itemWidth) {
+      scrollableList.appendChild(scrollableList.firstElementChild);
+      offset += itemWidth; // Adjust the offset to keep the movement smooth
+      scrollableList.style.transform = `translateX(${offset}px)`;
+    }
+  }
+
+  // Scroll automatically every 1 second
+  let autoScroll = setInterval(scrollItems, 1000);
+
+  // Scroll manually to the left
+  function scrollLeft() {
+    clearInterval(autoScroll); // Stop automatic scrolling
+    offset += itemWidth; // Move right
+    scrollableList.style.transform = `translateX(${offset}px)`;
+
+    // Move the last item to the beginning if it goes out of view
+    if (offset >= itemWidth) {
+      scrollableList.insertBefore(scrollableList.lastElementChild, scrollableList.firstElementChild);
+      offset -= itemWidth; // Adjust the offset to keep the movement smooth
+      scrollableList.style.transform = `translateX(${offset}px)`;
+    }
+  }
+
+  // Scroll manually to the right
+  function scrollRight() {
+    clearInterval(autoScroll); // Stop automatic scrolling
+    offset -= itemWidth; // Move left
+    scrollableList.style.transform = `translateX(${offset}px)`;
+
+    // Move the first item to the end if it goes out of view
+    if (offset <= -itemWidth) {
+      scrollableList.appendChild(scrollableList.firstElementChild);
+      offset += itemWidth; // Adjust the offset to keep the movement smooth
+      scrollableList.style.transform = `translateX(${offset}px)`;
+    }
+  }
+
+  // Add event listeners to the buttons
+  document.querySelector('.scroll-btn.left').addEventListener('click', scrollLeft);
+  document.querySelector('.scroll-btn.right').addEventListener('click', scrollRight);
+</script>
+
+</body>
+</html>

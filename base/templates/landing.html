@@ -82,10 +82,6 @@
                 <div class="logo">
     
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="0 0 20 20" version="1.1">
-        
-                        <title>sunset [#1257]</title>
-                        <desc>Created with Sketch.</desc>
-                        <defs>
                     
                     </defs>
                         <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -151,7 +147,79 @@
                 <div class="text1">
 
                     <h1 class="head1">Сайты под любую задачу</h1>
-                    <h2 class="head2">Разработаем и запустим ваш сайт</h2>
+
+                    <div class="features1">
+
+                        <div class="blur-dot"></div>
+
+                        <div class="feature1">
+
+                            <div class="feature-icon-wrapper">
+
+
+
+                            </div>
+
+                            <h2 class="feature-header">
+
+                                Дизайн
+
+                            </h2>
+
+                            <p class="feature-text">
+
+                                Разработаем высокакачественный дизайн
+
+                            </p>
+
+                        </div>
+
+                        <div class="feature1">
+
+                            <div class="feature-icon-wrapper">
+
+
+
+                            </div>
+
+                            <h2 class="feature-header">
+
+                                Реклама
+
+                            </h2>
+
+                            <p class="feature-text">
+
+                                Разработаем высокакачественный дизайн
+
+                            </p>
+
+                        </div>
+
+                        <div class="feature1">
+
+                            <div class="feature-icon-wrapper">
+
+
+
+                            </div>
+
+                            <h2 class="feature-header">
+
+                                Хостинг
+
+                            </h2>
+
+                            <p class="feature-text">
+
+                                Разработаем высокакачественный дизайн
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
                     <button id="ctaBtn"><b>Заказать</b></button>
 
                 </div>
@@ -273,12 +341,15 @@
                       <path d="M169.42,459.01s55.49-.9,57.29,53.7" fill="none" stroke="#002346" stroke-linecap="round" stroke-linejoin="round"></path>
                     </g>
                           
-
                 </div>
 
             </div>
 
         </section>
+
+        <svg class="wave1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#fff" fill-opacity="1" d="M0,128L60,160C120,192,240,256,360,261.3C480,267,600,213,720,176C840,139,960,117,1080,122.7C1200,128,1320,160,1380,176L1440,192V320H0V0Z"></path>
+        </svg>
 
         <section class="s2" id="portfolio">
 
@@ -931,13 +1002,20 @@
         
             background: #770016;
             color: #e7bfe9;
-        
-            border-radius: 0 0 200px 200px;
-        
+                
             text-align: center;
         
             z-index: 7;
             
+        }
+
+        .wave1 {
+
+            position: relative;
+            top: -500px;
+
+            z-index: 9;
+
         }
 
         .text1 {
@@ -960,6 +1038,60 @@
             left: 0;
 
             width: 100%;
+
+        }
+
+        .features1 {
+
+            position: relative;
+            top: 300px;
+            left: 0;
+
+            .feature1 {
+
+                position: relative;
+
+                width: 250px;
+                height: 200px;
+
+                display: inline-block;
+                margin-right: 30px;
+
+                border-radius: 20px;
+
+                color: #fff;
+
+                background: linear-gradient(135deg, #9f5bd3, #7027a0);
+
+                transform-style: preserve-3d;
+                transition: transform 1s ease-out;
+
+            }
+
+            .feature1 .blur-dot {
+                position: absolute;
+                width: 150px;
+                height: 150px;
+                background: rgba(255, 255, 255, 1);
+                filter: blur(50px);
+                border-radius: 50%;
+                pointer-events: none;
+                opacity: 0;
+                transform: translate(-50%, -50%);
+                transition: opacity 0.2s ease;
+            }
+
+            .feature-header {
+
+                font-size: 30px;
+
+            }
+
+            .feature-text {
+
+                font-size: 20px;    
+                    
+            }
 
         }
 
@@ -2107,6 +2239,60 @@
 
         // Add event listener for keydown on the document
         document.addEventListener('keydown', handleKeydown);
+
+    </script>
+
+    <!-- Card rotation cursor -->
+
+    <script>
+
+        const cards = document.querySelectorAll('.feature1');
+
+        // Select all cards
+
+        // Select all cards
+        
+        // Add event listeners for each card
+        cards.forEach(card => {
+            const blurDot = card.querySelector('.blur-dot'); // Select the blurred dot
+        
+            card.addEventListener('mousemove', (e) => {
+                let cardRect = card.getBoundingClientRect();
+        
+                // Calculate the center point of the card
+                let cardCenterX = cardRect.left + cardRect.width / 2;
+                let cardCenterY = cardRect.top + cardRect.height / 2;
+                
+                // Calculate the rotation for X and Y axes (inverted for proper 3D feel)
+                let xAxis = (cardCenterY - e.clientY) / 15; // Rotates along the Y axis
+                let yAxis = (e.clientX - cardCenterX) / 15; // Rotates along the X axis
+                
+                // Apply the rotation based on mouse movement
+                card.style.transform = `rotateY(${yAxis}deg) rotateX(${xAxis}deg)`;
+        
+                // Move the blurred dot to follow the cursor
+                let x = e.clientX - cardRect.left;
+                let y = e.clientY - cardRect.top;
+                blurDot.style.left = `${x}px`;
+                blurDot.style.top = `${y}px`;
+                blurDot.style.opacity = 1; // Make the dot visible
+            });
+        
+            // Reset the rotation and hide the dot when mouse leaves the card
+            card.addEventListener('mouseleave', () => {
+                card.style.transition = 'transform 0.5s ease';
+                card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+                
+                // Hide the blurred dot
+                blurDot.style.opacity = 0;
+            });
+        
+            // Remove transition when mouse enters the card
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'none';
+            });
+        });
+        
 
     </script>
 
