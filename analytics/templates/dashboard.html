@@ -12,12 +12,16 @@
     
     <script src="{% static 'packages/chart.js' %}"></script>
     <script src="{% static 'packages/chartjs-chart-geo.min.js' %}"></script>
-    <script src="{% static 'packages/flatpickr.js' %}"></script>
-    
-    <link rel="stylesheet" href="{% static 'css/flatpickr.min.css' %}">
-    <script src="{% static 'packages/jquery.min.js' %}"><script>
 
-    <style>
+    <script src="{% static 'packages/flatpickr.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/flatpickr.min.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
+
+    <script src="{% static 'packages/jquery.min.js' %}"></script>
+
+</head>
+
+<style>
 
         @font-face {
             font-family: C;
@@ -58,6 +62,7 @@
 
             position: relative;
             
+            top: 50px;
             
             display: flex;
             justify-content: center;
@@ -150,6 +155,8 @@
 
         }
 
+        .container-value span {display: inline;}
+
         .calendar-container {
             display: flex;
             justify-content: center;
@@ -177,14 +184,135 @@
             margin-top: 20px;
         }
 
+        .navbar {
+
+            position: relative;
+            top: 20px;
+            left: 20px;
+
+            width: 100%;
+            height: 60px;
+            
+        }
+
+        .logo {
+
+            position: relative;
+            left: 10px;
+            
+        }
+
+        #logoutBtn {
+
+            position: absolute;
+            top: 10px;
+            right: 20px;
+
+            color: inherit;
+            text-decoration: none;
+
+        }
+
+        .auth-btn {
+
+            display: flex;
+            align-items: center;
+
+            padding: 15px;
+
+            border-radius: 999px;
+
+            box-shadow:  5px 5px 10px #d1c7be,
+             -5px -5px 10px #ffffff;
+
+             cursor: pointer;
+            
+        }
+
+        @media screen and (max-width: 1425px) {
+
+            .analytics-container {
+
+                height: 155px;
+                
+            }
+            
+            .container-description {
+
+                font-size: 18px;
+
+            }
+
+            .container-value {
+
+                font-size: 35px;
+
+            }
+
+
+        }
+
+        @media screen and (max-width: 1200px) {
+
+            .section {
+
+                width: calc(100% - 70px);
+
+            }
+
+            .analytics-overview {
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+            }
+
+            .analytics-container {
+
+                margin-bottom: 40px;
+
+            }
+
+        }
 
     </style>
-</head>
+
 <body>
 
     <div class="navbar">
 
-        <a href="/logout">Выйти</a>
+        <div class="logo">
+
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="60px" viewBox="0 0 20 20" version="1.1">
+                        
+            </defs>
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Dribbble-Light-Preview" transform="translate(-260.000000, -2559.000000)" fill="#1E2330">
+                        <g id="icons" transform="translate(56.000000, 160.000000)">
+                            <path d="M218.232558,2406.22875 C217.841558,2405.82953 217.841558,2405.18324 218.232558,2404.78504 L220.353558,2402.61846 C220.744558,2402.22027 221.377558,2402.22027 221.768558,2402.61846 L221.768558,2402.61846 C222.158558,2403.01767 222.158558,2403.66397 221.768558,2404.06319 L219.646558,2406.22875 C219.256558,2406.62796 218.623558,2406.62796 218.232558,2406.22875 L218.232558,2406.22875 Z M213.000558,2403.08404 L213.000558,2400.02101 C213.000558,2399.45639 213.447558,2399 214.000558,2399 C214.552558,2399 215.000558,2399.45639 215.000558,2400.02101 L215.000558,2403.08404 C215.000558,2403.64764 214.552558,2404.10505 214.000558,2404.10505 C213.447558,2404.10505 213.000558,2403.64764 213.000558,2403.08404 L213.000558,2403.08404 Z M206.232558,2404.06319 C205.841558,2403.66397 205.841558,2403.01767 206.232558,2402.61846 L206.232558,2402.61846 C206.623558,2402.22027 207.256558,2402.22027 207.646558,2402.61846 L209.768558,2404.78504 C210.158558,2405.18324 210.158558,2405.82953 209.768558,2406.22875 C209.377558,2406.62796 208.744558,2406.62796 208.353558,2406.22875 L206.232558,2404.06319 Z M218.986558,2415.47195 C215.654558,2414.63983 212.345558,2414.63983 209.013558,2415.47195 C209.010558,2415.42601 209.000558,2415.3821 209.000558,2415.33616 C209.000558,2412.52123 211.243558,2410.23111 214.000558,2410.23111 C216.757558,2410.23111 219.000558,2412.52123 219.000558,2415.33616 C219.000558,2415.3821 218.989558,2415.42601 218.986558,2415.47195 L218.986558,2415.47195 Z M223.430558,2417.0586 C222.600558,2416.67164 221.773558,2416.33777 220.948558,2416.05291 C221.401558,2411.82286 218.111558,2408.18909 214.000558,2408.18909 C209.882558,2408.18909 206.599558,2411.83001 207.052558,2416.05291 C206.227558,2416.33777 205.400558,2416.67164 204.570558,2417.0586 C204.057558,2417.29752 203.854558,2417.93871 204.110558,2418.45126 C204.356558,2418.94339 204.935558,2419.13227 205.428558,2418.90357 C211.223558,2416.21014 216.777558,2416.21014 222.572558,2418.90357 C223.065558,2419.13227 223.644558,2418.94339 223.889558,2418.45126 C224.145558,2417.93871 223.942558,2417.29752 223.430558,2417.0586 L223.430558,2417.0586 Z" id="sunset-[#1257]">
+            
+            </path>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+
+        </div>
+
+        <a href="/logout"  id="logoutBtn">
+
+            <div class="auth-btn" title="Выйти из аккаунта">
+                    
+                <svg class="logout" style="padding-right: 10px" xmlns="http://www.w3.org/2000/svg" width="28.618" height="27.77" viewBox="0 0 28.618 27.77">
+                    <path id="Icon_open-account-logout" data-name="Icon open-account-logout" d="M9.606-1.086c-4,.8-3.2,2.4,0,3.2s9.606-4,12.808,0,3.2,12.007,0,16.01-9.606-.8-12.808,0-4,2.4,0,3.2,12.007,5.6,16.01,0,4-16.81,0-22.414S13.608-1.886,9.606-1.086Zm-3.2,6.4c-1.6.4-6.4,2.4-6.4,4.8s4.8,4.4,6.4,4.8,0-3.2,0-3.2,9.606.8,12.808,0,3.2-2.4,0-3.2S6.4,8.52,6.4,8.52,8,4.918,6.4,5.318Z" transform="translate(0 3.764)"/>
+                </svg>
+
+                <span style="position: relative; top: 2px;">Выйти</span>
+            
+            </div>
+
+        </a>
 
     </div>
     
@@ -219,14 +347,14 @@
                 <div class="analytics-container">
         
                     <span class="container-description">Среднее время просмотра</span>
-                    <span class="container-value"></span>
+                    <span class="container-value"><span id="averageMinutes">{{ average_view_time_minutes }}</span> м <span id="averageSeconds">{{average_view_time_seconds }}</span> с</span>
         
                 </div>
         
                 <div class="analytics-container">
         
                     <span class="container-description">Количество уникальных просмотров</span>
-                    <span class="container-value"></span>
+                    <span class="container-value" id="uniqueVisits">{{ unique_visits }}</span>
         
                 </div>
         
@@ -265,6 +393,14 @@
     </div>
 
     <script>
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") { // Check if the Enter key is pressed
+        alert("Window width: " + window.innerWidth + "px");
+    }
+});
+
+
         // Начальные данные для графика
         const initialChartData = {
             labels: {{ chart_labels|safe }},
@@ -387,6 +523,7 @@
 
         // Календарь для выбора диапазона дат
         flatpickr('#date-range', {
+            locale: 'ru',
             mode: 'range',
             dateFormat: 'd-m-Y',  // Формат dd-mm-yyyy
             defaultDate: [
@@ -413,7 +550,7 @@
                     .then(data => {
                         updateChart(data.chart_labels, data.chart_data);
                         renderMap(data.visit_data, data.country_names);
-                        updateData(data.total_visits)
+                        updateData(data.total_visits, data.unique_visits)
                     })
                     .catch(error => {
                         console.error('Произошла ошибка с fetch:', error);
@@ -429,9 +566,12 @@
             viewsChart.update();
         }
 
-        function updateData(total_visits) {
+        function updateData(total_visits, unique_visits, minutes, seconds) {
 
             $('#totalVisits').text(total_visits);
+            $('#uniqueVisits').text(unique_visits)
+            $('#averageMinutes').text(minutes);
+            $('#averageSeconds').text(seconds);
 
         }
 

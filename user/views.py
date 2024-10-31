@@ -35,4 +35,4 @@ def log_out(request):
 
     logout(request)
 
-    return redirect('/login')
+    return redirect('/4d-log1n')
