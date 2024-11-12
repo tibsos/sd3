@@ -125,6 +125,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 LOGIN_URL = '/4d-log1n'
 LOGOUT_REDIRECT_URL = '/'
 
+TELEGRAM_BOT_TOKEN = '7383909706:AAHvHceq3ZB3N5i29NrHQKXkq7Q9fy_gzNw'
+TELEGRAM_CHAT_ID = '1502110320'  # Add your chat ID or user ID
+
 
 """ TINYMCE_DEFAULT_CONFIG = {
     'cleanup_on_startup': True,

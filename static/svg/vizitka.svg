@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_Слой_1" data-name="Слой 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140.07 139.77">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke-width: 2px;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-5 {
+        stroke: #fff;
+      }
+
+      .cls-2, .cls-4 {
+        fill: #1d1d1b;
+      }
+
+      .cls-3, .cls-5 {
+        fill: #fff;
+      }
+
+      .cls-4 {
+        stroke: #1d1d1b;
+      }
+    </style>
+  </defs>
+  <rect class="cls-4" x=".5" y=".5" width="139.07" height="138.77"/>
+  <rect id="fon" class="cls-2" x="2.2" y="16.62" width="135.66" height="108.53" rx="7.09" ry="7.09"/>
+  <rect class="cls-3" x="9.28" y="53.98" width="51.42" height="1.74" rx=".87" ry=".87"/>
+  <rect class="cls-1" x="69.99" y="50.89" width="61.7" height="61.7" rx="4.98" ry="4.98"/>
+  <rect class="cls-3" x="2.16" y="37.23" width="135.66" height=".63" rx=".31" ry=".31"/>
+  <circle class="cls-5" cx="11.47" cy="27.12" r="4.09"/>
+  <circle class="cls-5" cx="26.08" cy="27.12" r="4.09"/>
+  <circle class="cls-5" cx="40.69" cy="27.12" r="4.09"/>
+  <rect class="cls-3" x="9.28" y="69.14" width="34.32" height="1.74" rx=".87" ry=".87"/>
+  <rect class="cls-3" x="9.28" y="84.74" width="25.28" height="1.74" rx=".87" ry=".87"/>
+  <rect class="cls-1" x="9.28" y="100.35" width="34.32" height="8.27" rx=".87" ry=".87"/>
+  <rect class="cls-1" x="67.01" y="88.25" width="43.47" height=".42" rx=".21" ry=".21" transform="translate(-33.8 62.3) rotate(-32.86)"/>
+  <rect class="cls-1" x="102.73" y="87.37" width="32.93" height=".65" rx=".21" ry=".21" transform="translate(87.74 -56.9) rotate(41.38)"/>
+  <circle class="cls-5" cx="121.32" cy="61.27" r="4.09"/>
+</svg>

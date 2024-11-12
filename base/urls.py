@@ -12,6 +12,8 @@ urlpatterns = [
     
     path('c', receive_contact_info),
 
+    path('d', discount_timer),
+
     path('test', test),
 
 ]
