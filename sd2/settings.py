@@ -10,11 +10,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
 
-    'www.paradaiz.ru',
-    'paradaiz.ru',
-    '127.0.0.1',
-
-    '192.168.1.41',
+    '*',
 
 ]
 
@@ -126,7 +122,7 @@ LOGIN_URL = '/4d-log1n'
 LOGOUT_REDIRECT_URL = '/'
 
 TELEGRAM_BOT_TOKEN = '7383909706:AAHvHceq3ZB3N5i29NrHQKXkq7Q9fy_gzNw'
-TELEGRAM_CHAT_ID = '1502110320'  # Add your chat ID or user ID
+TELEGRAM_CHAT_ID = '7482542861'  # Add your chat ID or user ID
 
 
 """ TINYMCE_DEFAULT_CONFIG = {
