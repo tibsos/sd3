@@ -63,19 +63,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'sd2.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -92,16 +85,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
 USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -121,7 +109,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 LOGIN_URL = '/4d-log1n'
 LOGOUT_REDIRECT_URL = '/'
 
-TELEGRAM_BOT_TOKEN = '7383909706:AAHvHceq3ZB3N5i29NrHQKXkq7Q9fy_gzNw'
+TELEGRAM_BOT_TOKEN = '7521713769:AAEdPHLdiL3fIWX2hFfA7GsU9PfVA8Iltvs'
 TELEGRAM_CHAT_ID = '7482542861'  # Add your chat ID or user ID
 
 

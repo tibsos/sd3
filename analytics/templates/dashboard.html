@@ -286,7 +286,6 @@
 
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="60px" viewBox="0 0 20 20" version="1.1">
                         
-            </defs>
                 <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g id="Dribbble-Light-Preview" transform="translate(-260.000000, -2559.000000)" fill="#1E2330">
                         <g id="icons" transform="translate(56.000000, 160.000000)">
@@ -392,15 +391,15 @@
 
     </div>
 
+    </body>
+
     <script>
 
-document.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") { // Check if the Enter key is pressed
-        alert("Window width: " + window.innerWidth + "px");
-    }
-});
-
-
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") { // Check if the Enter key is pressed
+                alert("Window width: " + window.innerWidth + "px");
+            }
+        });
         // Начальные данные для графика
         const initialChartData = {
             labels: {{ chart_labels|safe }},
@@ -410,7 +409,7 @@ document.addEventListener("keydown", function(event) {
                 backgroundColor: 'rgba(54, 162, 235, 0.7)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
-            }]
+            }],
         };
 
         const initialVisitData = {{ visit_data|safe }};
@@ -576,5 +575,5 @@ document.addEventListener("keydown", function(event) {
         }
 
     </script>
-</body>
+
 </html>

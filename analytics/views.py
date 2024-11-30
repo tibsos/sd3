@@ -12,6 +12,7 @@ from django.db.models import Count, Avg, F
 from .models import Visit
 
 def get_visits_data(start_date, end_date):
+    
     visits = Visit.objects.filter(entered_at__gte=start_date, entered_at__lte=end_date)
     
     # Group visits by day
@@ -31,11 +32,15 @@ def get_visits_data(start_date, end_date):
 
     # Calculate average view time in minutes and seconds
     average_view_time = visits.filter(left_at__isnull=False).annotate(view_time=F('left_at') - F('entered_at')).aggregate(Avg('view_time'))['view_time__avg']
+    
     if average_view_time:
+    
         total_seconds = average_view_time.total_seconds()
         minutes = int(total_seconds // 60)
         seconds = int(total_seconds % 60)
+    
     else:
+    
         minutes = 0
         seconds = 0
     

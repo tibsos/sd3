@@ -8,15 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <title>Парадайз — Разработка Сайтов</title>
+    <title>Парадайз</title>
 
     <meta name="description" content="">
-    <meta name="keywords" content="">
+    <meta name="keywords" content="сайты, парадайз, разработка, верстка, ">
 
     <script src="{% static 'packages/jquery.min.js' %}"></script>
 
     <meta name="og:type" content="website">
-    <meta name="og:title" content="">
+    <meta name="og:title" content="Парадайз — разработка сайтов">
     <meta name="og:description" content="">
     <meta name="og:image" content="{% static 'thumbnail.jpg' %}">
     <meta name="og:width" content="">
@@ -27,26 +27,14 @@
 
     <style>
 
-      @font-face {
-            font-family: RS;
-            src: url("{% static 'fonts/RF.ttf' %}");
-        }
-
         @font-face {
             font-family: COMF;
             src: url("{% static 'fonts/Comforta.ttf' %}");
         }
 
-        @font-face {
-            font-family: C;
-            src: url("{% static 'fonts/YOR.ttf' %}");
-        }
-
         body {
 
           overflow-x: hidden;
-
-
 
         }
 
@@ -119,6 +107,8 @@
 
             display: flex;
             align-items: center;
+
+            cursor: pointer;
 
         }
         .social-media {
@@ -1074,6 +1064,7 @@
             height: 650px;
 
             margin-right: 30px;
+            margin-bottom: 30px;
             float: left;
 
             display: flex;
@@ -1425,6 +1416,15 @@
 
             font-size: 25px;
 
+            transition: all 0.25s ease-in-out;
+
+        }
+
+        .field-over {
+
+          box-shadow: inset 2px 2px 6px #b8b28a,
+            inset -2px -2px 6px #f8f0ba;
+
         }
 
         .field-input:focus {
@@ -1456,8 +1456,7 @@
 
             cursor: pointer;
 
-            transition: box-shadow 0.25s ease-in-out;
-            transition: opacity 0.25s ease-in-out;
+            transition: all 0.25s ease-in-out;
 
         }
 
@@ -1494,6 +1493,31 @@
         }
 
         @media screen and (max-width: 1650px) {
+
+          .marketing-orientation-results {
+
+            top: 1000px;
+
+          }
+
+          .portfolio {
+
+            top: 1150px;
+
+          }
+
+
+          .plans {
+
+            top: 1250px;
+
+          }
+
+          .customer-reviews {
+
+            top: 1500px;
+
+          }
 
           #analyticsSVG {
 
@@ -1612,6 +1636,19 @@
 
           }
 
+          .advantages {
+
+            left: -20px;
+
+          }
+
+          #why-us {
+
+            display: grid;
+            place-items: center;
+
+          }
+
           .portfolio {
 
             top: 300px;  
@@ -1642,6 +1679,8 @@
 
           }
 
+
+
         }
 
         @media screen and (max-width: 1200px) {
@@ -1654,6 +1693,39 @@
 
         }
 
+        @media screen and (max-width: 1160px) {
+
+          .portfolio {
+
+            top: 700px;
+
+          }
+
+          .plans {
+
+            top: 800px;
+
+          }
+
+          .customer-reviews {
+
+            top: 1700px;
+
+          }
+
+          .contact-us {
+
+            top: 1800px;
+
+          }
+
+          .footer {
+
+            top: 1900px;
+
+          }
+
+        }
 
         @media screen and (max-width: 900px) {
 
@@ -1751,7 +1823,6 @@
 
               width: calc(100% - 50px);
 
-
             }
 
             .advantages {
@@ -1789,7 +1860,7 @@
             #our-marketing {
 
               position: relative;
-              top: -120px;
+              top: -10px;
 
             }
 
@@ -1829,7 +1900,7 @@
 
             .portfolio {
 
-              top: 950px;
+              top: 1100px;
               left: 25px;
 
               width: calc(100% - 50px);
@@ -1852,7 +1923,7 @@
 
             .plans {
 
-              top: 1100px;
+              top: 1200px;
 
             }
 
@@ -1937,13 +2008,13 @@
 
           .advantage {
 
-            width: 100%;
+            width: calc(100% - 50px);
             
           }
           
           .advantage .current {
             
-            height: 600px;
+            height: 800px;
 
 
           }
@@ -1972,7 +2043,57 @@
 
           }
 
+        }
 
+        @media screen and (max-width: 620px) {
+
+          .advantage {
+
+            margin-bottom: 80px;
+
+          }
+
+          .current {
+
+            height: 310px;
+
+          }
+
+          #our-marketing {
+
+            top: 400px;
+
+          }
+
+          .portfolio {
+
+            top: 1600px;
+
+          }
+
+          .plans {
+
+            top: 1800px;
+
+          }
+
+          .customer-reviews {
+
+            top: 4100px;
+
+          }
+
+          .contact-us {
+
+            top: 4300px;
+
+          }
+
+          .footer {
+
+            top: 4500px;
+
+          }
 
         }
 
@@ -2225,7 +2346,7 @@
                 </div>
 
                 <div class="advantage" id="supSec">
-                    <h3>ПОДДЕРЖИВАЕМ ВАС ВСЕГДА</h3>
+                    <h3>ПОДДЕРЖИВАЕМ ВАС</h3>
                     <p>Мы всегда на связи. Оказываем всестороннюю поддержку, чтобы вы чувствовали уверенность в каждом шаге вашего бизнеса.</p>
                 </div>
 
@@ -2233,7 +2354,7 @@
 
             <div class="advantage-illustrations">
 
-                <svg id="analyticsSVG" xmlns="http://www.w3.org/2000/svg" style="left: -80px;" width="865.76" height="682.89" viewBox="0 0 865.76 682.89">
+                <svg class="currentSVG" id="analyticsSVG" xmlns="http://www.w3.org/2000/svg" style="left: -80px;" width="865.76" height="682.89" viewBox="0 0 865.76 682.89">
                     <g>
                       <g>
                         <rect x="232.51" y="68.03" width="423.6" height="329.61" fill="#fff"></rect>
@@ -3979,7 +4100,7 @@
                         </svg>
 
                     <h4 class="h41">АНАЛИЗИРУЕМ ДАННЫЕ С ПОМОЩЬЮ ИИ</h4>
-                    <p class="h42">✓ Проводим сегментацию аудитории по демографическим и психографическим параметрам для точного таргетинга.<br>✓Изучаем поведенческие паттерны пользователей для прогнозирования их дальнейших действий. </p> 
+                    <p class="h42">✓ Проводим сегментацию аудитории по демографическим и психографическим параметрам для точного таргетинга.<br>✓Изучаем поведенческие паттерны пользователей и прогнозируем их дальнейшие действия. </p> 
 
                 </div>
 
@@ -4109,7 +4230,7 @@
 
                 <div class="portfolio-work">
 
-                  <img class="portfolio-img current" id="pi1" src="{% static 'img/portfolio/p1.jpg' %}" alt="Парадайз сайты под ключ портфолио 1" loading="lazy">
+                  <img class="portfolio-img" id="pi1" src="{% static 'img/portfolio/p1.jpg' %}" alt="Парадайз сайты под ключ портфолио 1" loading="lazy">
 
                   <img class="portfolio-img" id="pi2" src="{% static 'img/portfolio/p2.jpg' %}" alt="Парадайз сайты под ключ портфолио 1" loading="lazy">
 
@@ -4326,7 +4447,7 @@
 
                     <div class="review-content">
 
-                        <span>Работа выполнена качественно и в установленные сроки. В процессе выполнения возникали дополнительные задачи, которые были успешно решены без задержек. Всегда на связи, готовы оперативно помочь через любые удобные каналы коммуникации. Документы оформлены грамотно, бухгалтерия осталась довольна.</span>
+                        <span>Работа выполнена качественно и в установленные сроки. В процессе выполнения возникали дополнительные задачи, но работы были решены без задержек. Всегда на связи, готовы оперативно помочь через любые удобные каналы коммуникации. Документы оформлены грамотно, бухгалтерия осталась довольна.</span>
 
                     </div>
 
@@ -4517,6 +4638,8 @@
 
   </body>
 
+
+      <!-- SPACE = ALERT WINDOW WIDTH -->
     <script>
 
       document.addEventListener("keydown", function(event) {
@@ -4524,6 +4647,126 @@
               alert("Window width: " + window.innerWidth + "px");
           }
       });
+
+    </script>
+
+    <!-- FORM NEUMORPH -->
+    <script>
+
+      $('.field-input').mouseenter(function() {
+
+        $(this).addClass('field-over');
+
+      });
+
+      $('.field-input').mouseleave(function() {
+
+        $(this).removeClass('field-over');
+
+      });
+
+    </script>
+
+    <!-- SEC 2 TEXT + SVG -->
+    <script>
+
+        $('.advantage').click(function() {
+
+          $('.advantage').removeClass('current');
+
+          $('#analyticsSVG').removeClass('currentSVG');
+          $('#devSVG').removeClass('currentSVG');
+          $('#hostSVG').removeClass('currentSVG');
+          $('#adSVG').removeClass('currentSVG');
+          $('#supSVG').removeClass('currentSVG');
+
+          $(this).addClass('current');
+
+        });
+
+        $('#analSec').click(function() {
+
+          $('.advantage-illustrations svg').hide();
+          $('#analyticsSVG').addClass('currentSVG');
+
+            if ($(window).width() > 1300) {
+
+              $('#analyticsSVG').show();
+            }
+
+          });
+
+          $('#devSec').click(function() {
+
+            $('.advantage-illustrations svg').hide();
+
+            $('#devSVG').addClass('currentSVG');
+            
+            if ($(window).width() > 1300) {
+                
+                $('#devSVG').show();
+            }
+
+          });
+
+          $('#hostSec').click(function() {
+
+            $('.advantage-illustrations svg').hide();
+
+            $('#hostSVG').addClass('currentSVG');
+            
+            if ($(window).width() > 1300) {
+                
+                $('#hostSVG').show();
+            }
+
+          });
+
+          $('#adSec').click(function() {
+
+            $('.advantage-illustrations svg').hide();
+
+            $('#adSVG').addClass('currentSVG');
+            
+            if ($(window).width() > 1300) {
+                
+                $('#adSVG').show();
+            }
+
+          });
+
+          $('#supSec').click(function() {
+
+            $('.advantage-illustrations svg').hide();
+
+            $('#supSVG').addClass('currentSVG');
+            
+            if ($(window).width() > 1300) {
+                
+                $('#supSVG').show();
+            }
+
+          });
+
+        function toggleCurrentSVG(){
+
+          if ($(window).width() > 1300) {
+
+            $('.currentSVG').show();
+            
+          } else {
+            
+            $('.currentSVG').hide();
+
+          }
+
+        }
+
+        $(window).resize(function () {
+
+          toggleCurrentSVG();
+
+        });
 
     </script>
 
@@ -5087,60 +5330,6 @@ $('#next').click(function() {
             $(this).addClass('aimed1');
             }).on('mouseleave', function() {
             $(this).removeClass('aimed1');
-        });
-
-    </script>
-
-      <!-- FEATURES -->
-
-    <script>
-
-        $('#analSec').click(function() {
-
-            $('.advantage-illustrations svg').hide();
-
-            $('#analyticsSVG').show();
-
-        });
-
-        $('#devSec').click(function() {
-
-            $('.advantage-illustrations svg').hide();
-
-            $('#devSVG').show();
-
-        });
-
-        $('#hostSec').click(function() {
-
-            $('.advantage-illustrations svg').hide();
-
-            $('#hostSVG').show();
-
-        });
-
-        $('#adSec').click(function() {
-
-            $('.advantage-illustrations svg').hide();
-
-            $('#adSVG').show();
-
-        });
-
-        $('#supSec').click(function() {
-
-            $('.advantage-illustrations svg').hide();
-
-            $('#supSVG').show();
-
-        });
-
-        $('.advantage').click(function() {
-
-            $('.advantage').removeClass('current');
-
-            $(this).addClass('current');
-
         });
 
     </script>
