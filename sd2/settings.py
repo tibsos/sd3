@@ -6,11 +6,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-l(#za=%g#*eiy!bp@@9b3#t5)jeg_#+my096f95wd3+7d8tzb('
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
 
-    '*',
+    'paradaiz.ru',
 
 ]
 
