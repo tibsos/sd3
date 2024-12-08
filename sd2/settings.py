@@ -11,6 +11,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
 
     'paradaiz.ru',
+    'localhost',
 
 ]
 
