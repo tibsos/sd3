@@ -1,0 +1,27 @@
+ nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: ena>
+     Active: active (running) since Thu 2024-12-26 21:32:12 MSK; 3h 47min ago
+       Docs: man:nginx(8)
+   Main PID: 1095 (nginx)
+      Tasks: 13 (limit: 19095)
+     Memory: 21.1M
+        CPU: 798ms
+     CGroup: /system.slice/nginx.service
+             ├─1095 "nginx: master process /usr/sbin/nginx -g daemon on; master_pro>
+             ├─1096 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" >
+             ├─1097 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" >
+             ├─1101 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" >
+             ├─1102 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" >
+             ├─1103 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" >
+             ├─1106 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" >
+             ├─1107 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" >
+             ├─1109 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" >
+             ├─1111 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" >
+             ├─1112 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" >
+             ├─1114 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" >
+             └─1115 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" >
+
+дек 26 21:32:07 h0x-N55SF systemd[1]: Starting A high performance web server and a >
+дек 26 21:32:12 h0x-N55SF systemd[1]: Started A high performance web server and a r>
+lines 1-25
+
